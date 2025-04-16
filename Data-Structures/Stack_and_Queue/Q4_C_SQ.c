@@ -112,51 +112,66 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	if(q==NULL || isEmptyQueue(q)) return;
+
+	int n=q->ll.size;
+	int *buffer=(int*)malloc(sizeof(int)*n);
+
+	for(int i=0; i<n; i++){
+		buffer[i]=dequeue(q);
+	}
+	
+	for(int i=n-1;i>=0;i--){
+		enqueue(q,buffer[i]);
+	}
+
+	free(buffer);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void push(Stack *s, int item){
-   insertNode(&(s->ll), 0, item);
+    insertNode(&(s->ll), 0, item);
 }
 
 int pop(Stack *s){
-   int item;
-   if(!isEmptyStack(s)){
-    item = ((s->ll).head)->item;
-    removeNode(&(s->ll), 0);
-    return item;
-   }
+    int item;
+    if (!isEmptyStack(s)) {
+        item = ((s->ll).head)->item;
+        removeNode(&(s->ll), 0);
+        return item; 
+    }
     return INT_MIN;
 }
 
 int peek(Stack *s){
-   return ((s->ll).head)->item;
+    return ((s->ll).head)->item;
 }
 
 int isEmptyStack(Stack *s){
-   if ((s->ll).size == 0)
-      return 1;
-   return 0;
+    if ((s->ll).size == 0)
+        return 1;
+    return 0;
 }
 
 void enqueue(Queue *q, int item){
-   insertNode(&(q->ll), q->ll.size, item);
+    insertNode(&(q->ll), q->ll.size, item);
 }
 
 int dequeue(Queue *q){
-   int item;
-   item = ((q->ll).head)->item;
-   removeNode(&(q->ll), 0);
-   return item;
+    int item;
+    item = ((q->ll).head)->item;
+    removeNode(&(q->ll), 0);
+
+    return item; 
 }
 
 int isEmptyQueue(Queue *q){
-   if ((q->ll).size == 0)
-      return 1;
-   return 0;
+    if ((q->ll).size == 0)
+        return 1;
+    return 0;
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
